@@ -1,14 +1,18 @@
 
-public class ContaCorrente extends Conta {
+class ContaCorrente extends Conta {
+    private double chequeEspecial;
 
-	public ContaCorrente(Cliente cliente) {
-		super(cliente);
-	}
+    public ContaCorrente(int numero, Cliente cliente, double chequeEspecial) {
+        super(numero, cliente);
+        this.chequeEspecial = chequeEspecial;
+    }
 
-	@Override
-	public void imprimirExtrato() {
-		System.out.println("=== Extrato Conta Corrente ===");
-		super.imprimirInfosComuns();
-	}
-	
+    @Override
+    public boolean sacar(double valor) {
+        if ((saldo + chequeEspecial) >= valor) {
+            saldo -= valor;
+            return true;
+        }
+        return false;
+    }
 }
